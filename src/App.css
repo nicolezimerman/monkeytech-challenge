@@ -1,0 +1,24 @@
+#root {
+  max-width: 1280px;
+  margin: 0 auto;
+  padding: 2rem;
+  text-align: center;
+}
+
+body {
+  background-color: #232323;
+  color: #656565;
+  /*font-family: "Open Sans";*/
+}
+
+h2 {
+  color: white;
+}
+
+.dice {
+  background-color: #373737;
+}
+
+.submit {
+  background-color: #4c4c4b;
+}
