@@ -1,25 +1,24 @@
-import { useState } from "react";
 import "./App.css";
-import { RIDES } from "./mock-data/mock-data";
-import Cube from "./components/Cube/Cube";
 import HeaderInfo from "./components/HeaderInfo/HeaderInfo";
+import { Rides } from "./components/Rides/Rides";
+import { useRides } from "./hooks/useRides";
 
 function App() {
-  const [count, setCount] = useState(0);
+  const { rides, loading, error } = useRides();
+
   return (
     <div className="App">
       <header>
         <h2>The Jungle™ FastRider Service </h2>
+        <HeaderInfo />
+        <form className="form">
+          <input placeholder="#PIN" />
+          <button type="submit">SUBMIT</button>
+        </form>
       </header>
       <main>
-        <HeaderInfo />
-        {/* TO DO: <searchBar></searchBar>*/}
-        <button>SUBMIT</button>
-        <div className="cubes-container">
-          {RIDES.map((ride) => (
-            <Cube ride={ride} key={ride.id} />
-          ))}
-        </div>
+        {loading ? <p>Loading...</p> : <Rides rides={rides} />}
+        {error && <p>{error}</p>}
       </main>
     </div>
   );
