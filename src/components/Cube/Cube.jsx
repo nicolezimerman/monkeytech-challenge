@@ -2,9 +2,23 @@ import "./Cube.css";
 import clockIcon from "../../assets/clock-grey.png";
 import ticketIcon from "../../assets/ticket-grey.png";
 
-const Cube = ({ ride: { id, zone, name, remainingTickets, returnTime } }) => {
+const Cube = ({
+  ride: { id, zone, name, remainingTickets, returnTime },
+  selectRide,
+  selected,
+}) => {
+  const handleOnClick = () => {
+    selectRide(id);
+  };
   return (
-    <div className="cube" style={{ borderColor: zone.color }}>
+    <div
+      className="cube"
+      style={{
+        borderColor: zone.color,
+        backgroundColor: selected && zone.color,
+      }}
+      onClick={handleOnClick}
+    >
       <h4>{zone.name}</h4>
       <h2>{name}</h2>
       <div className="info">
