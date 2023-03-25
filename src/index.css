@@ -20,3 +20,11 @@ body {
 h2 {
   color: white;
 }
+
+.big-icon {
+  width: 50px;
+}
+
+.small-icon {
+  width: 20px;
+}

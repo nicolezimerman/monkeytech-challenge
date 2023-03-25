@@ -1,5 +1,4 @@
 import { useEffect, useState } from "react";
-import { RIDES } from "../mock-data/mock-data";
 
 const API_RIDES = "http://fast-rider.herokuapp.com/api/v1/rides";
 const TOKEN = import.meta.env.VITE_API_TOKEN;
