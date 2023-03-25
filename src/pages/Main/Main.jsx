@@ -1,10 +1,9 @@
-import "./App.css";
-import HeaderInfo from "./components/HeaderInfo/HeaderInfo";
-import { Rides } from "./components/Rides/Rides";
-import { useRides } from "./hooks/useRides";
 import { useState } from "react";
+import HeaderInfo from "../../components/HeaderInfo/HeaderInfo";
+import { Rides } from "../../components/Rides/Rides";
+import { useRides } from "../../hooks/useRides";
 
-function App() {
+function Main() {
   const { rides, loading, error } = useRides();
   const [selectedRide, setSelectedRide] = useState(null);
 
@@ -19,7 +18,7 @@ function App() {
   };
 
   return (
-    <div className="App">
+    <div className="main">
       <header>
         <h2>The Jungle™ FastRider Service </h2>
         <HeaderInfo />
@@ -47,4 +46,4 @@ function App() {
   );
 }
 
-export default App;
+export default Main;

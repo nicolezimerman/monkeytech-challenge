@@ -1,0 +1,10 @@
+.form {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+}
+.submit {
+  background-color: #4c4c4b;
+  color: white;
+  border-radius: 0px;
+}
