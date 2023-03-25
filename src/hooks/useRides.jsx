@@ -1,6 +1,7 @@
 import { useEffect, useState } from "react";
 
-const API_RIDES = "http://fast-rider.herokuapp.com/api/v1/rides";
+import { API_RIDES } from "../consts/consts";
+
 const TOKEN = import.meta.env.VITE_API_TOKEN;
 
 export function useRides() {

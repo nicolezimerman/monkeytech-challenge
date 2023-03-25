@@ -3,20 +3,31 @@ import { useState } from "react";
 import HeaderInfo from "../../components/HeaderInfo/HeaderInfo";
 import { Rides } from "../../components/Rides/Rides";
 import { useRides } from "../../hooks/useRides";
+import { useTickets } from "../../hooks/useTickets";
 
 function Main() {
-  const [pin, setPin] = useState("");
   const { rides, loading, error } = useRides();
+  const {
+    ticket,
+    reserveTicket,
+    loading: loadingTicket,
+    error: errorTicket,
+  } = useTickets();
+
+  const [pin, setPin] = useState("");
   const [selectedRide, setSelectedRide] = useState(null);
 
   const handleSelectRide = (number) => {
     number === selectedRide ? setSelectedRide(null) : setSelectedRide(number);
   };
 
-  const handleSubmit = (event) => {
+  const handleSubmit = async (event) => {
     event.preventDefault();
     //TO DO validation and implementation
     if (!selectedRide) alert("You should select a ride first");
+    if (!pin) alert("You should enter a PIN");
+
+    await reserveTicket(pin, selectedRide);
   };
 
   const handleChangePin = (event) => {
@@ -40,6 +51,7 @@ function Main() {
             SUBMIT
           </button>
         </form>
+        {errorTicket && <p style={{ color: "red" }}>{errorTicket}</p>}
       </header>
       <main>
         {/* TO DO check the responsabilities */}
