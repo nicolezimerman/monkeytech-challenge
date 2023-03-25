@@ -19,10 +19,10 @@ const Cube = ({
       }}
       onClick={handleOnClick}
     >
-      <h4>{zone.name}</h4>
-      <h2>{name}</h2>
-      <div className="info">
-        <div className="time">
+      <p className="zone">{zone.name}</p>
+      <p className="name">{name}</p>
+      <div className="ride-info">
+        <div className="data">
           <img className="icon" src={clockIcon} alt="Clock icon" />
           {new Date(returnTime).toLocaleTimeString([], {
             hour: "2-digit",
@@ -30,7 +30,7 @@ const Cube = ({
             hour12: false,
           })}
         </div>
-        <div className="tickets">
+        <div className="data">
           <img className="icon" src={ticketIcon} alt="Ticket icon" />
           {remainingTickets}
         </div>

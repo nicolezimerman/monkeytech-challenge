@@ -1,9 +1,9 @@
 import "./Main.css";
 import { useState } from "react";
 import HeaderInfo from "../../components/HeaderInfo/HeaderInfo";
-import { Rides } from "../../components/Rides/Rides";
 import { useRides } from "../../hooks/useRides";
 import { useTickets } from "../../hooks/useTickets";
+import Cube from "../../components/Cube/Cube";
 
 function Main() {
   const { rides, loading, error } = useRides();
@@ -58,11 +58,16 @@ function Main() {
         {loading ? (
           <p>Loading...</p>
         ) : (
-          <Rides
-            rides={rides}
-            selectRide={handleSelectRide}
-            selected={selectedRide}
-          />
+          <div className="rides">
+            {rides.map((ride) => (
+              <Cube
+                ride={ride}
+                key={ride.id}
+                selectRide={handleSelectRide}
+                selected={ride.id == selectedRide}
+              />
+            ))}
+          </div>
         )}
         {error && <p>{error}</p>}
       </main>
