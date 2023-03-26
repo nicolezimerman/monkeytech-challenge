@@ -19,12 +19,33 @@ function Main() {
 
   const [pin, setPin] = useState("");
   const [selectedRide, setSelectedRide] = useState(null);
-
   const [formErrors, setFormErrors] = useState();
+  const [showButton, setShowButton] = useState(true);
+
+  const isMobile = window.innerWidth <= 768;
 
   useEffect(() => {
     const savedData = localStorage.getItem("userPin");
     if (savedData) setPin(JSON.parse(savedData).pin);
+  }, []);
+
+  useEffect(() => {
+    const handleScroll = () => {
+      const section = document.getElementById("rides-section");
+      if (section.getBoundingClientRect().top <= window.innerHeight) {
+        setShowButton(true);
+      } else {
+        setShowButton(false);
+      }
+    };
+
+    if (isMobile) {
+      window.addEventListener("scroll", handleScroll);
+    }
+
+    return () => {
+      window.removeEventListener("scroll", handleScroll);
+    };
   }, []);
 
   const isOpen = () => {
@@ -114,9 +135,11 @@ function Main() {
                 onChange={handleChangePin}
                 value={pin}
               />
-              <button type="submit" className="submit">
-                SUBMIT
-              </button>
+              {showButton && (
+                <button type="submit" className="submit">
+                  SUBMIT
+                </button>
+              )}
             </form>
             {formErrors &&
               Object.values(formErrors).map((err) => {
@@ -126,7 +149,7 @@ function Main() {
             {loading ? (
               <p>Loading...</p>
             ) : (
-              <div className="rides">
+              <div className="rides" id="rides-section">
                 {rides.map((ride) => (
                   <Cube
                     ride={ride}
