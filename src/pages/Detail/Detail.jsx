@@ -1,15 +1,24 @@
 import "./Detail.css";
 import checkIcon from "../../assets/check.png";
-import { useLocation } from "react-router-dom";
+import { useLocation, useNavigate } from "react-router-dom";
+import Icon from "../../components/Icon/Icon";
 
 function Detail() {
   const location = useLocation();
+  let navigate = useNavigate();
+
   const { ticket } = location.state;
-  const { ride, accessCode, returnTime } = ticket;
+  if (ticket) {
+    const { ride, accessCode, returnTime } = ticket;
+  } else {
+    navigate("/");
+  }
 
   return (
     <div className="detail-container">
-      <img alt="Check" className="big-icon" src={checkIcon} />
+      <Icon>
+        <img alt="Check" className="big-icon" src={checkIcon} />
+      </Icon>
       <p>
         Thank you for using The Jungle™ FastRider ticket system - your access
         code is now ready!
@@ -21,7 +30,7 @@ function Detail() {
         }}
       >
         <div className="ride-info">
-          <p className="name">{ride.name}</p>
+          <p className="ride-name">{ride.name}</p>
           <p>{ride.zone.name}</p>
         </div>
 

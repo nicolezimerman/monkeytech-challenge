@@ -1,0 +1,15 @@
+.logo-container {
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  overflow: hidden;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background-color: #656565;
+}
+
+.logo {
+  max-width: 80%;
+  max-height: 80%;
+}
