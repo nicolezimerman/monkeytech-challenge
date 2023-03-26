@@ -1,4 +1,4 @@
-const API_BASE = "http://fast-rider.herokuapp.com/api/v1";
+const API_BASE = "https://fast-rider.herokuapp.com/api/v1";
 export const API_TICKETS = `${API_BASE}/tickets`;
 export const API_RIDES = `${API_BASE}/rides`;
 export const OPEN_TIME = "09:00";
