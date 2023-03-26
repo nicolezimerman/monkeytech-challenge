@@ -30,7 +30,7 @@ export function useTickets() {
     try {
       setLoading(true);
       setError(null);
-      const res = fetch(API_TICKETS, {
+      const res = await fetch(API_TICKETS, {
         method: "POST",
         headers: {
           Accept: "application/json",
@@ -42,10 +42,16 @@ export function useTickets() {
         }),
       });
 
-      const json = await res.json();
-      //TO DO: If error code, set error instead of set ticket data
-      const ticketMapped = await mapTicket(json);
-      setTicketData(ticketMapped);
+      // TO DO see how to show error if needed
+      if (res.status == 200) {
+        const json = await res.json();
+        const ticketMapped = await mapTicket(json);
+        setTicketData(ticketMapped);
+        return ticketMapped;
+      } else {
+        setError(json);
+        return json;
+      }
     } catch (e) {
       setError(e.message);
     } finally {

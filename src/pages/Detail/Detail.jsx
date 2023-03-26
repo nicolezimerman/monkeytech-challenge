@@ -1,10 +1,12 @@
 import "./Detail.css";
 import checkIcon from "../../assets/check.png";
 import TICKET from "../../mock-data/ticket-response";
+import { useLocation } from "react-router-dom";
 
-function Detail(ticket) {
-  //TO Do: map data when API implemented
-  const { id, ride, access_code, return_time } = TICKET;
+function Detail() {
+  const location = useLocation();
+  const { ticket } = location.state;
+  const { id, ride, accessCode, returnTime } = ticket;
 
   return (
     <div className="detail-container">
@@ -28,7 +30,7 @@ function Detail(ticket) {
           <div>
             <h4>Return at</h4>
             <h2>
-              {new Date(return_time).toLocaleTimeString([], {
+              {new Date(returnTime).toLocaleTimeString([], {
                 hour: "2-digit",
                 minute: "2-digit",
                 hour12: false,
@@ -37,7 +39,7 @@ function Detail(ticket) {
           </div>
           <div>
             <h4>Use access code</h4>
-            <h2>{access_code}</h2>
+            <h2>{accessCode}</h2>
           </div>
         </div>
       </div>

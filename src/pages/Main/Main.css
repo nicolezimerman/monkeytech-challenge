@@ -20,6 +20,9 @@
   border: none;
   flex-grow: 1;
 }
+.closed {
+  color: white;
+}
 
 .rides {
   display: grid;
