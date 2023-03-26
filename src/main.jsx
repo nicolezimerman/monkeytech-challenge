@@ -5,16 +5,23 @@ import "./index.css";
 import Detail from "./pages/Detail/Detail";
 import Main from "./pages/Main/Main";
 import ErrorPage from "./pages/Error/Error";
+import App from "./App";
 
 const router = createBrowserRouter([
   {
     path: "/",
-    element: <Main />,
+    element: <App />,
     errorElement: <ErrorPage />,
-  },
-  {
-    path: "/detail",
-    element: <Detail />,
+    children: [
+      {
+        path: "/",
+        element: <Main />,
+      },
+      {
+        path: "/detail",
+        element: <Detail />,
+      },
+    ],
   },
 ]);
 

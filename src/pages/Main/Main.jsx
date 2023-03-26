@@ -37,8 +37,7 @@ function Main() {
 
   return (
     <div className="main">
-      <header>
-        <h2>The Jungle™ FastRider Service </h2>
+      <main>
         <HeaderInfo />
         <form className="form" onSubmit={handleSubmit}>
           <input
@@ -52,8 +51,6 @@ function Main() {
           </button>
         </form>
         {errorTicket && <p style={{ color: "red" }}>{errorTicket}</p>}
-      </header>
-      <main>
         {/* TO DO check the responsabilities */}
         {loading ? (
           <p>Loading...</p>
