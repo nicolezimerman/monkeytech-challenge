@@ -6,6 +6,7 @@ import { useTickets } from "../../hooks/useTickets";
 import Cube from "../../components/Cube/Cube";
 import { useNavigate } from "react-router-dom";
 import { OPEN_TIME, CLOSE_TIME } from "../../consts/consts";
+import { validatePin } from "../../helpers/helpers";
 
 function Main() {
   let navigate = useNavigate();
@@ -68,6 +69,7 @@ function Main() {
 
     if (isValid) {
       localStorage.setItem("userPin", JSON.stringify({ pin: pin }));
+
       //TO DO see if return error
       const ticket = await reserveTicket(pin, selectedRide);
       navigate("/detail", { state: { ticket } });
@@ -78,39 +80,17 @@ function Main() {
     let err = {};
 
     if (!selectedRide) err.ride = "You should select a ride";
-    if (!pin) err.pin = "You should enter a PIN";
-
-    // TO DO validate pin:
-    /* if(pin){
-      const isValidPin = validatePin();
-    } */
+    if (!pin) {
+      err.pin = "You should enter a PIN";
+    } else {
+      const isValidPin = validatePin(pin);
+      if (!isValidPin) err.invalidPin = "The pin is invalid";
+    }
 
     setFormErrors({ ...err });
     return Object.keys(err).length < 1;
   };
 
-  const isValidPin = () => {
-    let err = false;
-    //check the lenght ==15
-    if (pin.length != 15) err = true;
-    const arr = pin.split("-");
-    //check the array have 4 parts
-    if (arr.length !== 4) {
-      err = true;
-      return;
-    }
-    //check the first part is equal to "JN"
-    if (arr[0] != "JN") err = true;
-
-    //check the last part is equal to 2 uppercase letters
-    const regexUppercaseLetters = /^[A-Z]{2}$/;
-    if (!regexUppercaseLetters.test(arr[3])) err = true;
-
-    //TO DO
-    //check the value of each part equal the letter
-
-    return err;
-  };
   const handleChangePin = (event) => {
     const updatedPin = event.target.value;
     setPin(updatedPin);
@@ -142,10 +122,13 @@ function Main() {
               )}
             </form>
             {formErrors &&
-              Object.values(formErrors).map((err) => {
-                return <p style={{ color: "red" }}>{err}</p>;
+              Object.values(formErrors).map((err, index) => {
+                return (
+                  <p key={index} style={{ color: "red" }}>
+                    {err}
+                  </p>
+                );
               })}
-            {/* TO DO check the responsabilities */}
             {loading ? (
               <p>Loading...</p>
             ) : (

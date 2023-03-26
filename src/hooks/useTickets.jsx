@@ -42,16 +42,15 @@ export function useTickets() {
         }),
       });
 
-      // TO DO see how to show error if needed
-      if (res.status == 200) {
-        const json = await res.json();
-        const ticketMapped = await mapTicket(json);
-        setTicketData(ticketMapped);
-        return ticketMapped;
-      } else {
-        setError(json);
-        return json;
+      debugger;
+      if (res.status !== 200) {
+        const err = await res.json();
+        throw new Error(err);
       }
+      const json = await res.json();
+      const ticketMapped = await mapTicket(json);
+      setTicketData(ticketMapped);
+      return ticketMapped;
     } catch (e) {
       setError(e.message);
     } finally {
