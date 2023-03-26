@@ -1,5 +1,5 @@
 import "./Main.css";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import HeaderInfo from "../../components/HeaderInfo/HeaderInfo";
 import { useRides } from "../../hooks/useRides";
 import { useTickets } from "../../hooks/useTickets";
@@ -22,6 +22,11 @@ function Main() {
 
   const [formErrors, setFormErrors] = useState();
 
+  useEffect(() => {
+    const savedData = localStorage.getItem("userPin");
+    if (savedData) setPin(JSON.parse(savedData).pin);
+  }, []);
+
   const isOpen = () => {
     const now = new Date();
     const startTime = new Date(now.toDateString() + " " + OPEN_TIME);
@@ -41,6 +46,7 @@ function Main() {
     const isValid = validateForm();
 
     if (isValid) {
+      localStorage.setItem("userPin", JSON.stringify({ pin: pin }));
       //TO DO see if return error
       const ticket = await reserveTicket(pin, selectedRide);
       navigate("/detail", { state: { ticket } });
