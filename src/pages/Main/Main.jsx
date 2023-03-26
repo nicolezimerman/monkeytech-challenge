@@ -70,9 +70,8 @@ function Main() {
     if (isValid) {
       localStorage.setItem("userPin", JSON.stringify({ pin: pin }));
 
-      //TO DO see if return error
       const ticket = await reserveTicket(pin, selectedRide);
-      navigate("/detail", { state: { ticket } });
+      if (ticket) navigate("/detail", { state: { ticket } });
     }
   };
 
@@ -121,6 +120,7 @@ function Main() {
                 </button>
               )}
             </form>
+            {errorTicket && <p style={{ color: "red" }}>{errorTicket}</p>}
             {formErrors &&
               Object.values(formErrors).map((err, index) => {
                 return (

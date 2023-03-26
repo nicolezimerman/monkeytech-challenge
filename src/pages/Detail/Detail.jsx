@@ -1,12 +1,11 @@
 import "./Detail.css";
 import checkIcon from "../../assets/check.png";
-import TICKET from "../../mock-data/ticket-response";
 import { useLocation } from "react-router-dom";
 
 function Detail() {
   const location = useLocation();
   const { ticket } = location.state;
-  const { id, ride, accessCode, returnTime } = ticket;
+  const { ride, accessCode, returnTime } = ticket;
 
   return (
     <div className="detail-container">
@@ -21,13 +20,13 @@ function Detail() {
           borderColor: ride.zone.color,
         }}
       >
-        <div>
-          <h4>{ride.name}</h4>
-          <h4>{ride.zone.name}</h4>
+        <div className="ride-info">
+          <p className="name">{ride.name}</p>
+          <p>{ride.zone.name}</p>
         </div>
 
         <div>
-          <div>
+          <div className="ticket-info">
             <h4>Return at</h4>
             <h2>
               {new Date(returnTime).toLocaleTimeString([], {
@@ -37,7 +36,7 @@ function Detail() {
               })}
             </h2>
           </div>
-          <div>
+          <div className="ticket-info">
             <h4>Use access code</h4>
             <h2>{accessCode}</h2>
           </div>

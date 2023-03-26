@@ -6,3 +6,50 @@
   align-items: center;
   justify-content: center;
 }
+.detail-container p {
+  font-size: 14px;
+  font-weight: 600;
+}
+
+.ticket-data {
+  width: 100%;
+  background-color: #373737;
+  border-top: 5px solid;
+  word-wrap: break-word;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: space-between;
+  padding: 5px;
+}
+
+.ride-info {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-evenly;
+  align-items: center;
+}
+.ride-info p {
+  font-size: 12px;
+  font-weight: 600;
+  margin: 0;
+  margin-bottom: 10px;
+}
+.ride-name {
+  color: white;
+}
+
+.ticket-info h4 {
+  margin: 0;
+}
+.ticket-info h2 {
+  margin: 5px;
+  font-size: 18px;
+}
+
+/* Styles for my-element on mobile devices */
+@media screen and (max-width: 480px) {
+  .detail-container {
+    width: unset;
+  }
+}

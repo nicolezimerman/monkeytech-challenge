@@ -42,14 +42,14 @@ export function useTickets() {
         }),
       });
 
-      debugger;
       if (res.status !== 200) {
         const err = await res.json();
-        throw new Error(err);
+        throw new Error(err.message);
       }
       const json = await res.json();
       const ticketMapped = await mapTicket(json);
       setTicketData(ticketMapped);
+
       return ticketMapped;
     } catch (e) {
       setError(e.message);
