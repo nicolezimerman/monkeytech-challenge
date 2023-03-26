@@ -5,6 +5,13 @@
   justify-content: center;
 }
 
+/* Styles for my-element on mobile devices */
+@media screen and (max-width: 480px) {
+  .header-data {
+    flex-direction: column;
+  }
+}
+
 .box {
   padding: 15px;
   font-size: 12px;
