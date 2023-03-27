@@ -6,7 +6,7 @@ import { useTickets } from "../../hooks/useTickets";
 import Cube from "../../components/Cube/Cube";
 import { useNavigate } from "react-router-dom";
 import { OPEN_TIME, CLOSE_TIME } from "../../consts/consts";
-import { validatePin } from "../../helpers/helpers";
+import { validatePin, isOpen } from "../../helpers/helpers";
 
 function Main() {
   let navigate = useNavigate();
@@ -49,16 +49,6 @@ function Main() {
     };
   }, []);
 
-  const isOpen = () => {
-    const now = new Date();
-    const startTime = new Date(now.toDateString() + " " + OPEN_TIME);
-    const endTime = new Date(now.toDateString() + " " + CLOSE_TIME);
-    const currentTime = now.getTime();
-    return (
-      currentTime >= startTime.getTime() && currentTime <= endTime.getTime()
-    );
-  };
-
   const handleSelectRide = (number) => {
     number === selectedRide ? setSelectedRide(null) : setSelectedRide(number);
   };
@@ -100,7 +90,7 @@ function Main() {
     <div className="main">
       <main>
         <HeaderInfo />
-        {!isOpen() ? (
+        {!isOpen(OPEN_TIME, CLOSE_TIME) ? (
           <h3 className="closed">
             {`FastRider cards cannot be issued outside the park's operating hours
             from ${OPEN_TIME} to ${CLOSE_TIME}`}

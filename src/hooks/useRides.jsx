@@ -1,6 +1,7 @@
 import { useEffect, useState } from "react";
-
 import { API_RIDES } from "../consts/consts";
+import { OPEN_TIME, CLOSE_TIME } from "../consts/consts";
+import { isOpen } from "../helpers/helpers";
 
 const TOKEN = import.meta.env.VITE_API_TOKEN;
 
@@ -32,7 +33,7 @@ export function useRides() {
   };
 
   useEffect(() => {
-    getRides();
+    if (isOpen(OPEN_TIME, CLOSE_TIME)) getRides();
   }, []);
 
   return { rides: mappedRides, getRides, loading, error };

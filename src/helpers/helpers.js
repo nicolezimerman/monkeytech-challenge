@@ -51,3 +51,11 @@ export const validatePin = (pin) => {
 
   return err;
 };
+
+export const isOpen = (openTime, closeTime) => {
+  const now = new Date();
+  const startTime = new Date(now.toDateString() + " " + openTime);
+  const endTime = new Date(now.toDateString() + " " + closeTime);
+  const currentTime = now.getTime();
+  return currentTime >= startTime.getTime() && currentTime <= endTime.getTime();
+};
