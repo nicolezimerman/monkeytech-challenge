@@ -8,10 +8,9 @@ function Detail() {
   let navigate = useNavigate();
 
   const { ticket } = location.state;
-  if (ticket) {
-    const { ride, accessCode, returnTime } = ticket;
-  } else {
-    navigate("/");
+
+  if (!ticket) {
+    navigate("/", { replace: true });
   }
 
   return (
@@ -26,19 +25,19 @@ function Detail() {
       <div
         className="ticket-data"
         style={{
-          borderColor: ride.zone.color,
+          borderColor: ticket.ride.zone.color,
         }}
       >
         <div className="ride-info">
-          <p className="ride-name">{ride.name}</p>
-          <p>{ride.zone.name}</p>
+          <p className="ride-name">{ticket.ride.name}</p>
+          <p>{ticket.ride.zone.name}</p>
         </div>
 
         <div>
           <div className="ticket-info">
             <h4>Return at</h4>
             <h2>
-              {new Date(returnTime).toLocaleTimeString([], {
+              {new Date(ticket.returnTime).toLocaleTimeString([], {
                 hour: "2-digit",
                 minute: "2-digit",
                 hour12: false,
@@ -47,7 +46,7 @@ function Detail() {
           </div>
           <div className="ticket-info">
             <h4>Use access code</h4>
-            <h2>{accessCode}</h2>
+            <h2>{ticket.accessCode}</h2>
           </div>
         </div>
       </div>
