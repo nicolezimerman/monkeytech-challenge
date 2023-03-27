@@ -1,14 +1,37 @@
 const convertToASCII = (str) => {
-  const value =
-    str
-      .split("")
-      .reduce((accumulator, currentValue) => accumulator + currentValue, 0) /
-      26 +
-    65;
-  return String.fromCharCode(value);
+  //step A: split string and multiply each for 1 o 2
+  const stepA = str.split("").map((val, index) => {
+    return Number(val) * (isEven(index + 1) ? 2 : 1);
+  });
+
+  //Step B: Check if one number is bigger than 9 and reduce to one digit
+  const stepB = stepA.map((val) => {
+    return val > 9 ? reduceToOneNumber(val) : val;
+  });
+
+  //step C: reduce to one number
+  const stepC = stepB.reduce((accumulator, currentValue) => {
+    return accumulator + currentValue;
+  }, 0);
+  //step D:  make module of 26 and add 65
+  const stepD = (stepC % 26) + 65;
+  return String.fromCharCode(stepD);
 };
 
-export const validatePin = (pin) => {
+const isEven = (num) => num % 2 === 0;
+
+const reduceToOneNumber = (number) => {
+  const result = number
+    .toString()
+    .split("")
+    .reduce(
+      (accumulator, currentValue) => accumulator + Number(currentValue),
+      0
+    );
+  return result;
+};
+
+export const isValidPin = (pin) => {
   let err = true;
   //check the lenght ==15
   if (pin.length != 15) {

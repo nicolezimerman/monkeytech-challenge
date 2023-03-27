@@ -6,7 +6,7 @@ import { useTickets } from "../../hooks/useTickets";
 import Cube from "../../components/Cube/Cube";
 import { useNavigate } from "react-router-dom";
 import { OPEN_TIME, CLOSE_TIME } from "../../consts/consts";
-import { validatePin, isOpen } from "../../helpers/helpers";
+import { isValidPin, isOpen } from "../../helpers/helpers";
 
 function Main() {
   let navigate = useNavigate();
@@ -72,8 +72,8 @@ function Main() {
     if (!pin) {
       err.pin = "You should enter a PIN";
     } else {
-      const isValidPin = validatePin(pin);
-      if (!isValidPin) err.invalidPin = "The pin is invalid";
+      const isValid = isValidPin(pin);
+      if (!isValid) err.invalidPin = "The pin is invalid";
     }
 
     setFormErrors({ ...err });
